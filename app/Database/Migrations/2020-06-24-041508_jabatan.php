@@ -1,9 +1,8 @@
 <?php namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
-use CodeIgniter\Database\MySQLi\Forge;
 
-class Users extends Migration
+class Jabatan extends Migration
 {
 	public function up()
 	{
@@ -14,21 +13,16 @@ class Users extends Migration
 				'unsigned' => true,
 				'autoincrement' =>true
 			],
-			'username'	=>[
+			'nama_jabatan'	=>[
 				'type' => 'varchar',
 				'constraint' =>255,
 			],
-			'password'	=>[
-				'type'	=>'varchar',
-				'constraint' =>255				
+			'jml_karyawan'	=>[
+				'type'	=>'int',
 			],
-			'level'	=>[
-				'type'	=>'INT',
-				'constraint'	=>1
-			]
 		]);
 		$this->forge->addKey('id',true);
-		$this->forge->createTable('users');
+		$this->forge->createTable('jabatan');
 	}
 
 	//--------------------------------------------------------------------
@@ -36,6 +30,7 @@ class Users extends Migration
 	public function down()
 	{
 		//
-		$this->forge->dropTable('users');
+		$this->forge->dropTable('jabatan');
+
 	}
 }
