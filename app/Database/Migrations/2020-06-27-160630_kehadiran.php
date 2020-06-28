@@ -12,7 +12,7 @@ class Kehadiran extends Migration
 			'id' => [
 				'type' => 'int',
 				'unsigned' => true,
-				'autoincrement' => true
+				'auto_increment' => true
 			],
 			'id_jadwal' => [
 				'type' => 'int',

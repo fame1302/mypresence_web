@@ -13,7 +13,7 @@ class ProfilJadwal extends Migration
 			'id'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
-				'autoincrement' => true
+				'auto_increment' => true
 			],
 			'nama_profil'	=> [
 				'type' => 'varchar',

@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -8,43 +10,42 @@ class Karyawan extends Migration
 	{
 		//
 		$this->forge->addField([
-			'id'	=>[
+			'id'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
-				'autoincrement' =>true
+				'auto_increment' => true
 			],
-			'id_user'	=>[
+			'id_user'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
 			],
-			'nama'	=>[
+			'nama'	=> [
 				'type' => 'varchar',
-				'constraint' =>255,
+				'constraint' => 255,
 			],
-			'jenis_kelamin'	=>[
-				'type'	=>'varchar',
-				'constraint' =>1				
+			'jenis_kelamin'	=> [
+				'type'	=> 'varchar',
+				'constraint' => 1
 			],
-			'alamat'	=>[
-				'type'	=>'varchar',
-				'constraint'	=>255
+			'alamat'	=> [
+				'type'	=> 'varchar',
+				'constraint'	=> 255
 			],
-			'id_jabatan'	=>[
-				'type'	=>'int',
+			'id_jabatan'	=> [
+				'type'	=> 'int',
 				'unsigned' => true,
 			],
-			'foto'	=>[
-				'type'	=>'varchar',
-				'constraint'	=>255,
-				'null'	=>true
+			'foto'	=> [
+				'type'	=> 'varchar',
+				'constraint'	=> 255,
+				'null'	=> true
 			],
-			
-		]);
-		$this->forge->addKey('id',true);
-		$this->forge->addForeignKey('id_user','users','id');
-		$this->forge->addForeignKey('id_jabatan','jabatan','id');
-		$this->forge->createTable('karyawan');
 
+		]);
+		$this->forge->addKey('id', true);
+		$this->forge->addForeignKey('id_user', 'users', 'id');
+		$this->forge->addForeignKey('id_jabatan', 'jabatan', 'id');
+		$this->forge->createTable('karyawan');
 	}
 
 	//--------------------------------------------------------------------
@@ -53,6 +54,5 @@ class Karyawan extends Migration
 	{
 		//
 		$this->forge->dropTable('karyawan');
-
 	}
 }

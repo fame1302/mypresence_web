@@ -1,4 +1,6 @@
-<?php namespace App\Database\Migrations;
+<?php
+
+namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
@@ -8,20 +10,20 @@ class Jabatan extends Migration
 	{
 		//
 		$this->forge->addField([
-			'id'	=>[
+			'id'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
-				'autoincrement' =>true
+				'auto_increment' => true
 			],
-			'nama_jabatan'	=>[
+			'nama_jabatan'	=> [
 				'type' => 'varchar',
-				'constraint' =>255,
+				'constraint' => 255,
 			],
-			'jml_karyawan'	=>[
-				'type'	=>'int',
+			'jml_karyawan'	=> [
+				'type'	=> 'int',
 			],
 		]);
-		$this->forge->addKey('id',true);
+		$this->forge->addKey('id', true);
 		$this->forge->createTable('jabatan');
 	}
 
@@ -31,6 +33,5 @@ class Jabatan extends Migration
 	{
 		//
 		$this->forge->dropTable('jabatan');
-
 	}
 }

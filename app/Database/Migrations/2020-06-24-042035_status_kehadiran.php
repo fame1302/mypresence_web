@@ -13,7 +13,7 @@ class StatusKehadiran extends Migration
 			'id'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
-				'autoincrement' => true
+				'auto_increment' => true
 			],
 			'kode'	=> [
 				'type' => 'varchar',

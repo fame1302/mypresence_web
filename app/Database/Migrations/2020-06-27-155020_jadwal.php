@@ -13,7 +13,7 @@ class Jadwal extends Migration
 			'id'	=> [
 				'type' => 'INT',
 				'unsigned' => true,
-				'autoincrement' => true
+				'auto_increment' => true
 			],
 			'id_profil'	=> [
 				'type' => 'int',
