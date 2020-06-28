@@ -32,6 +32,15 @@ class ProfilJadwal extends Migration
 			'keterangan'	=> [
 				'type'	=> 'varchar',
 				'constraint' => 255
+			],
+			'created_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'modified_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'deleted_at'	=> [
+				'type'	=> 'datetime',
 			]
 		]);
 		$this->forge->addKey('id', true);

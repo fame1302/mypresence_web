@@ -22,6 +22,15 @@ class Jadwal extends Migration
 			'tanggal'	=> [
 				'type'	=> 'datetime'
 			],
+			'created_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'modified_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'deleted_at'	=> [
+				'type'	=> 'datetime',
+			]
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addForeignKey('id_profil', 'profil_jadwal', 'id');

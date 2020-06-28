@@ -24,6 +24,15 @@ class StatusKehadiran extends Migration
 				'constraint' => 255,
 
 			],
+			'created_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'modified_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'deleted_at'	=> [
+				'type'	=> 'datetime',
+			]
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->createTable('status_kehadiran');

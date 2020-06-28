@@ -33,6 +33,15 @@ class Users extends Migration
 			'level'	=> [
 				'type'	=> 'INT',
 				'constraint'	=> 1
+			],
+			'created_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'modified_at'	=> [
+				'type'	=> 'datetime',
+			],
+			'deleted_at'	=> [
+				'type'	=> 'datetime',
 			]
 		]);
 		$this->forge->addKey('id', true);
