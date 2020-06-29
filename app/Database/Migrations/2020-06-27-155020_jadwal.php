@@ -24,12 +24,18 @@ class Jadwal extends Migration
 			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			],
 			'modified_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			],
 			'deleted_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			]
 		]);
 		$this->forge->addKey('id', true);

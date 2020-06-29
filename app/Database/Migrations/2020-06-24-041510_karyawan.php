@@ -42,12 +42,18 @@ class Karyawan extends Migration
 			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			],
 			'modified_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			],
 			'deleted_at'	=> [
 				'type'	=> 'datetime',
+				'null' => true
+
 			]
 
 		]);
