@@ -10,6 +10,9 @@ class UserController extends BaseController
 {
     public function index()
     {
+        if (isset(session()->user_data)) {
+            return redirect()->to('/admin');
+        }
         $data = [
             'title' => 'My Presence - Login',
             'validation' => \Config\Services::validation()
@@ -61,7 +64,8 @@ class UserController extends BaseController
             'level' => $userModel->getUser($this->request->getPost('username'))['level']
         ];
         // dd($user);
-        return redirect()->to('/admin')->with('user_data', $user);
+        session()->set('user_data', $user);
+        return redirect()->to('/admin');
 
 
         // return redirect()->to('/login')->with('error', $error);

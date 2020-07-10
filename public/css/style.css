@@ -1,0 +1,13 @@
+.pass-eye {
+  position: absolute;
+  top: 11px;
+  right: -22px;
+}
+
+.pass-eye.check {
+  top: 10 !important;
+  width: 1.2em;
+  height: 1.2em;
+  opacity: 0;
+  cursor: pointer;
+}

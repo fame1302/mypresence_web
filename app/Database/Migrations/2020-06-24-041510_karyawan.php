@@ -45,7 +45,7 @@ class Karyawan extends Migration
 				'null' => true
 
 			],
-			'modified_at'	=> [
+			'updated_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true
 

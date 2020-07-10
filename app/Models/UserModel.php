@@ -7,8 +7,8 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'users';
-    // protected $useSoftDeletes = true;
-    // protected $useTimestamps = true;
+    protected $useTimestamps = true;
+    protected $allowedFields = ['username', 'password', 'email', 'level'];
 
     public function getUser($username = false)
     {

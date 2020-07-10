@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>My Presence - Login</title>
+  <title><?= $title; ?></title>
 
   <!-- Custom fonts for this template-->
   <link href="sb_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,6 +40,8 @@
                     <h1 class="h4 text-gray-900 mb-4">Selamat Datang</h1>
                   </div>
                   <form class="user" method="post" action="/login">
+                    <?= csrf_field() ?>
+
                     <div class="form-group">
                       <input value="<?= old('username'); ?>" name="username" type="text" class="form-control <?= ($validation->hasError('username')) ? 'is-invalid' : ''; ?>" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukkan Username">
                       <div class="invalid-feedback">
