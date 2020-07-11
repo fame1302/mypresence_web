@@ -58,7 +58,7 @@
       </div>
 
       <!-- Nav Item - Jabatan -->
-      <li class="nav-item <?= ($page_data['sub_title'] == 'Daftar Jabatan') ? 'active' : ''; ?>">
+      <li class="nav-item <?= ($page_data['title'] == 'Jabatan') ? 'active' : ''; ?>">
         <a class="nav-link" href="/admin/jabatan">
           <i class="fas fa-fw fa-id-badge"></i>
           <span>Jabatan</span></a>

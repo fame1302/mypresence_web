@@ -9,6 +9,8 @@ class JabatanModel extends Model
 {
     protected $table = 'jabatan';
     protected $useTimestamps = true;
+    protected $allowedFields = ['nama_jabatan', 'nama_singkat', 'jml_karyawan'];
+
 
     public function getJabatan($id = false)
     {

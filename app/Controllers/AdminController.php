@@ -64,6 +64,139 @@ class AdminController extends BaseController
         # code...
     }
 
+    public function tambah_jabatan()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $data = [
+            'page_data' => [
+                'title' => 'Jabatan',
+                'sub_title' => 'Tambah Jabatan',
+            ],
+            'validation' => \Config\Services::validation(),
+            'list_jabatan' => $this->jabatan->getAvailableJabatan()
+        ];
+
+        return view('admin/tambah_jabatan', $data);
+
+        # code...
+    }
+
+    function save_jabatan()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        if (!$this->validate([
+            'nama_jabatan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama jabatan tidak boleh kosong!',
+                ]
+            ],
+            'nama_singkat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama singkat tidak boleh kosong!',
+                ]
+            ],
+            'jml_karyawan' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'jumlah maksimal karyawan tidak boleh kosong!',
+                    'integer' => 'jumlah maksimal karyawan harus berupa angka!',
+                ]
+            ],
+        ])) {
+            return redirect()->to('/admin/tambah_jabatan')->withInput();
+        }
+
+        $this->jabatan->save([
+            'nama_jabatan' => $this->request->getVar('nama_jabatan'),
+            'nama_singkat' => $this->request->getVar('nama_singkat'),
+            'jml_karyawan' => $this->request->getVar('jml_karyawan')
+        ]);
+        session()->setFlashdata('success', 'Jabatan berhasil ditambahkan!');
+        return redirect()->to('/admin/tambah_jabatan');
+    }
+
+    public function delete_jabatan($id)
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $use = $this->karyawan->where(['id_jabatan' => $id])->first();
+        if ($use !== null) {
+            session()->setFlashdata('error', 'Jabatan sudah ada yang mengisi!');
+            return redirect()->to('/admin/jabatan');
+        }
+
+        $this->jabatan->delete($id);
+        session()->setFlashdata('success', 'Jabatan berhasil dihapus!');
+        return redirect()->to('/admin/jabatan');
+    }
+
+    public function edit_jabatan($id)
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $data = [
+            'page_data' => [
+                'title' => 'Jabatan',
+                'sub_title' => 'Edit Jabatan',
+            ],
+            'validation' => \Config\Services::validation(),
+            'jabatan' => $this->jabatan->where(['id' => $id])->first()
+        ];
+
+        return view('admin/edit_jabatan', $data);
+    }
+
+    public function update_jabatan()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+        if (!$this->validate([
+            'nama_jabatan' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama jabatan tidak boleh kosong!',
+                ]
+            ],
+            'nama_singkat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama singkat tidak boleh kosong!',
+                ]
+            ],
+            'jml_karyawan' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'jumlah maksimal karyawan tidak boleh kosong!',
+                    'integer' => 'jumlah maksimal karyawan harus berupa angka!',
+                ]
+            ],
+        ])) {
+            return redirect()->to('/admin/tambah_jabatan')->withInput();
+        }
+
+        $this->jabatan->save([
+            'id' => $this->request->getVar('id'),
+            'nama_jabatan' => $this->request->getVar('nama_jabatan'),
+            'nama_singkat' => $this->request->getVar('nama_singkat'),
+            'jml_karyawan' => $this->request->getVar('jml_karyawan')
+        ]);
+        session()->setFlashdata('success', 'Perubahan berhasil disimpan!');
+        return redirect()->to('/admin/jabatan');
+    }
+
     public function karyawan()
     {
         if (!isset(session()->user_data)) {

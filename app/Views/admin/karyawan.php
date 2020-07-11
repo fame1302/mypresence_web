@@ -52,7 +52,8 @@
                 <td><?= $key['alamat']; ?></td>
                 <td><?= $key['jabatan']; ?></td>
                 <td>
-                  <a href="/admin/edit_karyawan/<?= $key['id']; ?>" class="btn btn-warning">Edit</a>
+                  <a href="/admin/edit_karyawan/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
+
                   <form action="/admin/karyawan/<?= $key['id']; ?>" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="delete">

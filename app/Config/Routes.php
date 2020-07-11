@@ -37,10 +37,15 @@ $routes->get('/login', 'UserController::index');
 $routes->post('/login', 'UserController::login');
 $routes->get('/admin', 'AdminController::index');
 $routes->get('/admin/jabatan', 'AdminController::jabatan');
-$routes->delete('/admin/karyawan/(:num)', 'AdminController::delete_user/$1');
+$routes->get('/admin/tambah_jabatan', 'AdminController::tambah_jabatan');
+$routes->post('/admin/tambah_jabatan', 'AdminController::save_jabatan');
+$routes->delete('/admin/jabatan/(:num)', 'AdminController::delete_jabatan/$1');
+$routes->get('/admin/edit_jabatan/(:num)', 'AdminController::edit_jabatan/$1');
+$routes->post('/admin/edit_jabatan/', 'AdminController::update_jabatan');
 $routes->get('/admin/karyawan', 'AdminController::karyawan');
 $routes->get('/admin/tambah_karyawan', 'AdminController::tambah_karyawan');
 $routes->post('/admin/tambah_karyawan', 'AdminController::save_user');
+$routes->delete('/admin/karyawan/(:num)', 'AdminController::delete_user/$1');
 $routes->get('/admin/edit_karyawan/(:any)', 'AdminController::edit_user/$1');
 $routes->post('/admin/edit_karyawan', 'AdminController::update_user');
 
