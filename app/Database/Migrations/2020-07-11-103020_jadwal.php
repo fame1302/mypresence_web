@@ -22,6 +22,10 @@ class Jadwal extends Migration
 			'tanggal'	=> [
 				'type'	=> 'datetime'
 			],
+			'id_lokasi'	=> [
+				'type'	=> 'int',
+				'unsigned'	=> true,
+			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true
@@ -40,6 +44,7 @@ class Jadwal extends Migration
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->addForeignKey('id_profil', 'profil_jadwal', 'id');
+		$this->forge->addForeignKey('id_lokasi', 'lokasi', 'id');
 		$this->forge->createTable('jadwal');
 	}
 

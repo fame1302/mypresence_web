@@ -26,34 +26,27 @@ class Kehadiran extends Migration
 				'type' => 'int',
 				'unsigned' => true,
 			],
-			'foto_masuk' => [
+			'foto' => [
 				'type' => 'varchar',
 				'constraint' => 255,
 				'null' => true
 			],
-			'foto_pulang' => [
-				'type' => 'varchar',
-				'constraint' => 255,
-				'null' => true
-			],
-			'jam_masuk' => [
+
+			'jam' => [
 				'type' => 'time',
-				'null' => true
 			],
-			'jam_pulang' => [
-				'type' => 'time',
-				'null' => true
+
+			'lat' => [
+				'type' => 'float',
 			],
-			'lokasi_masuk' => [
+			'long' => [
+				'type' => 'float',
+			],
+			'jenis' => [
 				'type' => 'varchar',
-				'constraint' => 255,
-				'null' => true
+				'constraint' => 1,
 			],
-			'lokasi_pulang' => [
-				'type' => 'varchar',
-				'constraint' => 255,
-				'null' => true
-			],
+
 			'created_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true
