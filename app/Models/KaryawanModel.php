@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use App\Models\JabatanModel;
+use App\Models\UserModel;
 
 class KaryawanModel extends Model
 {
@@ -23,6 +24,7 @@ class KaryawanModel extends Model
                 $new[$num] = $key;
                 // array_push($new[$num], ['jabatan' => 'tes']);
                 $new[$num]['jabatan'] = $jabatan['nama_jabatan'];
+                // $new[$num]['username'] = $jabatan['nama_jabatan'];
 
                 // $new[$num] = array_push($key, ['jabatan' => $jabatan]);
                 $num++;
@@ -34,5 +36,18 @@ class KaryawanModel extends Model
         $id = $user->where(['username' => $username])->first()['id'];
         return $this->where(['id_user' => $id])->first();
         # code...
+    }
+
+    function getKaryawanById($id)
+    {
+        $karyawan = $this->where(['id' => $id])->first();
+        $user_id = $karyawan['id_user'];
+        $userModel = new UserModel();
+        $user = $userModel->where(['id' => $user_id])->first();
+        $karyawan['username'] = $user['username'];
+        $karyawan['password'] = $user['password'];
+        $karyawan['email'] = $user['email'];
+        $karyawan['level'] = $user['level'];
+        return $karyawan;
     }
 }

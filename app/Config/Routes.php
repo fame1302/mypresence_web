@@ -41,6 +41,8 @@ $routes->delete('/admin/karyawan/(:num)', 'AdminController::delete_user/$1');
 $routes->get('/admin/karyawan', 'AdminController::karyawan');
 $routes->get('/admin/tambah_karyawan', 'AdminController::tambah_karyawan');
 $routes->post('/admin/tambah_karyawan', 'AdminController::save_user');
+$routes->get('/admin/edit_karyawan/(:any)', 'AdminController::edit_user/$1');
+$routes->post('/admin/edit_karyawan', 'AdminController::update_user');
 
 /**
  * --------------------------------------------------------------------

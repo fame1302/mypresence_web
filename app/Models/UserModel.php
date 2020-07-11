@@ -13,6 +13,5 @@ class UserModel extends Model
     public function getUser($username = false)
     {
         return $this->where(['username' => $username])->first();
-        # code...
     }
 }

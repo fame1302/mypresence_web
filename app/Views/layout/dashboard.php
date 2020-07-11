@@ -58,7 +58,7 @@
       </div>
 
       <!-- Nav Item - Jabatan -->
-      <li class="nav-item <?= ($page_data['sub_title'] == 'Jabatan') ? 'active' : ''; ?>">
+      <li class="nav-item <?= ($page_data['sub_title'] == 'Daftar Jabatan') ? 'active' : ''; ?>">
         <a class="nav-link" href="/admin/jabatan">
           <i class="fas fa-fw fa-id-badge"></i>
           <span>Jabatan</span></a>
@@ -73,7 +73,7 @@
         <div id="collapseUtilities" class="collapse <?= ($page_data['title'] == 'Karyawan') ? 'show' : ''; ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Menu Karyawan</h6>
-            <a class="collapse-item <?= ($page_data['sub_title'] == 'Daftar Karyawan') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/karyawan">Lihat Karyawan</a>
+            <a class="collapse-item <?= (($page_data['sub_title'] == 'Daftar Karyawan') || ($page_data['sub_title'] == 'Edit Karyawan')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/karyawan">Lihat Karyawan</a>
             <a class="collapse-item <?= ($page_data['sub_title'] == 'Tambah Karyawan') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/tambah_karyawan">Tambah Karyawan</a>
           </div>
         </div>

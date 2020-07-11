@@ -11,8 +11,8 @@ class TestVarController extends BaseController
 {
     public function index()
     {
-        $var = new KaryawanModel();
-        dd($var->getKaryawan());
+        $var = new JabatanModel();
+        dd($var->getAvailableJabatanOnEdit(2));
         # code...
     }
 }
