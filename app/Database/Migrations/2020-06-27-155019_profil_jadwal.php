@@ -29,10 +29,6 @@ class ProfilJadwal extends Migration
 				'type'	=> 'int',
 				'constraint' => 3
 			],
-			'keterangan'	=> [
-				'type'	=> 'varchar',
-				'constraint' => 255
-			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true

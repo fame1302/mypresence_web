@@ -13,7 +13,11 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $page_data['sub_title']; ?></h6>
+            <ul class="my-breadcrumb">
+                <li class="m-0 font-weight-bold text-primary"><a href="/admin/jabatan"><?= $page_data['title']; ?></a></li>
+                <li class="m-0 font-weight-bold">/</li>
+                <li class="m-0 font-weight-bold"><?= $page_data['sub_title']; ?></li>
+            </ul>
         </div>
         <div class="card-body">
             <?php if (session()->getFlashdata('success') !== null) : ?>

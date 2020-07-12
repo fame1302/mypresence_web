@@ -20,6 +20,7 @@
   <link href="<?= base_url(); ?>/css/style.css" rel="stylesheet">
 
   <link href="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
 
 
 </head>
@@ -75,6 +76,29 @@
             <h6 class="collapse-header">Menu Karyawan</h6>
             <a class="collapse-item <?= (($page_data['sub_title'] == 'Daftar Karyawan') || ($page_data['sub_title'] == 'Edit Karyawan')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/karyawan">Lihat Karyawan</a>
             <a class="collapse-item <?= ($page_data['sub_title'] == 'Tambah Karyawan') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/tambah_karyawan">Tambah Karyawan</a>
+          </div>
+        </div>
+      </li>
+
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Heading -->
+      <div class="sidebar-heading">
+        Kelola Jadwal
+      </div>
+
+      <!-- Nav Item - Karyawan -->
+      <li class="nav-item <?= ($page_data['title'] == 'Jadwal') ? 'active' : ''; ?>">
+        <a class="nav-link  <?= ($page_data['title'] == 'Jadwal') ? '' : 'collapsed'; ?>" href="#" data-toggle="collapse" data-target="#collapseUtilities2" aria-expanded=" <?= ($page_data['title'] == 'Jadwal') ? 'true' : 'false'; ?>" aria-controls="collapseUtilities2">
+          <i class="fas fa-fw fa-calendar-check"></i>
+          <span>Jadwal</span>
+        </a>
+        <div id="collapseUtilities2" class="collapse <?= ($page_data['title'] == 'Jadwal') ? 'show' : ''; ?>" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Menu Jadwal</h6>
+            <a class="collapse-item <?= (($page_data['sub_title'] == 'Tambah Profil Jadwal') || ($page_data['sub_title'] == 'Profil Jadwal')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/profil_jadwal"><span class="fa fa-tasks mr-2"></span> Profil Jadwal</a>
+            <a class="collapse-item <?= (($page_data['sub_title'] == 'Tambah Profil Jadwal') || ($page_data['sub_title'] == 'Lokasi')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/lokasi"><span class="fas fa-map-marker mr-2"></span> Lokasi</a>
+            <a class="collapse-item <?= ($page_data['sub_title'] == 'Tambah Jadwal') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/tambah_Jadwal">Tambah Jadwal</a>
           </div>
         </div>
       </li>

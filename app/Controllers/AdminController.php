@@ -6,7 +6,11 @@ use App\Libraries;
 use App\Models\User;
 use App\Models\KaryawanModel;
 use App\Models\JabatanModel;
+use App\Models\JadwalModel;
+use App\Models\ProfilJadwalModel;
 use App\Models\UserModel;
+use CodeIgniter\Validation\Validation as ValidationValidation;
+use Config\Validation;
 
 class AdminController extends BaseController
 {
@@ -16,12 +20,16 @@ class AdminController extends BaseController
     protected $karyawan;
     protected $jabatan;
     protected $user;
+    protected $profil_jadwal;
+    protected $jadwal;
 
     public function __construct()
     {
         $this->karyawan = new KaryawanModel();
         $this->jabatan = new JabatanModel();
         $this->user = new UserModel();
+        $this->profil_jadwal = new ProfilJadwalModel();
+        $this->jadwal = new JadwalModel();
     }
 
     public function index()
@@ -163,6 +171,7 @@ class AdminController extends BaseController
         if (!isset(session()->user_data)) {
             return redirect()->to('/login');
         }
+        $id = $this->request->getVar('id');
         if (!$this->validate([
             'nama_jabatan' => [
                 'rules' => 'required',
@@ -184,7 +193,7 @@ class AdminController extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to('/admin/tambah_jabatan')->withInput();
+            return redirect()->to('/admin/edit_jabatan/' . $id)->withInput();
         }
 
         $this->jabatan->save([
@@ -360,8 +369,6 @@ class AdminController extends BaseController
             return redirect()->to('/login');
         }
 
-        // $jabatan = new JabatanModel();
-        // $karyawan = new KaryawanModel();
         $data = [
             'page_data' => [
                 'title' => 'Karyawan',
@@ -489,6 +496,158 @@ class AdminController extends BaseController
         // $karyawan = new KaryawanModel();
         session()->setFlashdata('success', 'Data berhasil di ubah!');
         return redirect()->to('/admin/karyawan');
+    }
+
+
+    public function profil_jadwal()
+    {
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Profil Jadwal',
+            ],
+            'profil_jabatan' => $this->profil_jadwal->findAll()
+        ];
+        return view('admin/profil_jadwal', $data);
+        # code...
+    }
+
+    public function add_profil_jadwal()
+    {
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Profil Jadwal',
+            ],
+            'validation' => \Config\Services::validation(),
+            'profil_jadwal' => $this->profil_jadwal->findAll()
+        ];
+        return view('admin/tambah_profil_jadwal', $data);
+        # code...
+    }
+
+    public function save_profil_jadwal()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+        // dd($this->request->getVar());
+        if (!$this->validate([
+            'nama_profil' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama profil tidak boleh kosong!',
+                ]
+            ],
+            'jam_masuk' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'jam masuk tidak boleh kosong!',
+                ]
+            ],
+            'jam_pulang' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'jam pulang tidak boleh kosong!',
+                ]
+            ],
+            'durasi' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'durasi tidak boleh kosong!',
+                    'integer' => 'durasi harus berupa angka!',
+                ]
+            ],
+
+        ])) {
+            return redirect()->to('/admin/tambah_profil_jadwal')->withInput();
+        }
+
+        $this->profil_jadwal->save([
+            'nama_profil' => $this->request->getVar('nama_profil'),
+            'jam_masuk' => $this->request->getVar('jam_masuk'),
+            'jam_pulang' => $this->request->getVar('jam_pulang'),
+            'durasi' => $this->request->getVar('durasi'),
+        ]);
+
+        session()->setFlashdata('success', 'profil berhasil disimpan!');
+        return redirect()->to('/admin/profil_jadwal');
+    }
+
+    public function delete_profil_jadwal($id)
+    {
+
+        $this->profil_jadwal->delete($id);
+
+        session()->setFlashdata('success', 'Data berhasil di dihapus!');
+        return redirect()->to('/admin/profil_jadwal');
+    }
+
+    public function edit_profil_jadwal($id)
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Profil Jadwal',
+            ],
+            'validation' => \Config\Services::validation(),
+            'profil_jadwal' => $this->profil_jadwal->find($id)
+        ];
+
+        return view('/admin/edit_profil_jadwal', $data);
+    }
+
+    public function update_profil_jadwal()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $id = $this->request->getVar('id');
+        if (!$this->validate([
+            'nama_profil' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama profil tidak boleh kosong!',
+                ]
+            ],
+            'jam_masuk' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'jam masuk tidak boleh kosong!',
+                ]
+            ],
+            'jam_pulang' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'jam pulang tidak boleh kosong!',
+                ]
+            ],
+            'durasi' => [
+                'rules' => 'required|integer',
+                'errors' => [
+                    'required' => 'durasi tidak boleh kosong!',
+                    'integer' => 'durasi harus berupa angka!',
+                ]
+            ],
+
+        ])) {
+            return redirect()->to('/admin/edit_profil_jadwal/' . $id)->withInput();
+        }
+
+        $this->profil_jadwal->save([
+            'id' => $id,
+            'nama_profil' => $this->request->getVar('nama_profil'),
+            'jam_masuk' => $this->request->getVar('jam_masuk'),
+            'jam_pulang' => $this->request->getVar('jam_pulang'),
+            'durasi' => $this->request->getVar('durasi'),
+        ]);
+        session()->setFlashdata('success', 'Perubahan berhasil disimpan!');
+        return redirect()->to('/admin/profil_jadwal');
     }
     //--------------------------------------------------------------------
 
