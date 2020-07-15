@@ -18,12 +18,16 @@ class Lokasi extends Migration
 				'type' => 'varchar',
 				'constraint' => 255
 			],
+			'alamat'	=> [
+				'type' => 'varchar',
+				'constraint' => 255
+			],
 			'lat'	=> [
-				'type'	=> 'float',
+				'type'	=> 'double',
 				// 'constraint'	=> 255
 			],
 			'long'	=> [
-				'type'	=> 'float',
+				'type'	=> 'double',
 			],
 			'created_at'	=> [
 				'type'	=> 'datetime',

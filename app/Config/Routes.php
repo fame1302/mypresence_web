@@ -58,6 +58,15 @@ $routes->post('/admin/tambah_profil_jadwal', 'AdminController::save_profil_jadwa
 $routes->get('/admin/edit_profil_jadwal/(:num)', 'AdminController::edit_profil_jadwal/$1');
 $routes->post('/admin/edit_profil_jadwal', 'AdminController::update_profil_jadwal');
 
+$routes->get('/admin/lokasi', 'AdminController::lokasi');
+$routes->delete('/admin/lokasi/(:num)', 'AdminController::delete_lokasi/$1');
+$routes->get('/admin/tambah_lokasi', 'AdminController::add_lokasi');
+$routes->post('/admin/tambah_lokasi', 'AdminController::save_lokasi');
+$routes->get('/admin/edit_lokasi/(:num)', 'AdminController::edit_lokasi/$1');
+$routes->post('/admin/edit_lokasi', 'AdminController::update_lokasi');
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

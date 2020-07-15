@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\KaryawanModel;
 use App\Models\JabatanModel;
 use App\Models\JadwalModel;
+use App\Models\LokasiModel;
 use App\Models\ProfilJadwalModel;
 use App\Models\UserModel;
 use CodeIgniter\Validation\Validation as ValidationValidation;
@@ -22,6 +23,7 @@ class AdminController extends BaseController
     protected $user;
     protected $profil_jadwal;
     protected $jadwal;
+    protected $lokasi;
 
     public function __construct()
     {
@@ -30,6 +32,7 @@ class AdminController extends BaseController
         $this->user = new UserModel();
         $this->profil_jadwal = new ProfilJadwalModel();
         $this->jadwal = new JadwalModel();
+        $this->lokasi = new LokasiModel();
     }
 
     public function index()
@@ -649,6 +652,151 @@ class AdminController extends BaseController
         session()->setFlashdata('success', 'Perubahan berhasil disimpan!');
         return redirect()->to('/admin/profil_jadwal');
     }
-    //--------------------------------------------------------------------
 
+    public function lokasi()
+    {
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Lokasi',
+            ],
+            'lokasi' => $this->lokasi->findAll()
+        ];
+        return view('admin/lokasi', $data);
+        # code...
+    }
+
+    public function add_lokasi()
+    {
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Lokasi',
+            ],
+            'validation' => \Config\Services::validation(),
+            'lokasi' => $this->lokasi->findAll()
+        ];
+        return view('admin/tambah_lokasi', $data);
+        # code...
+    }
+
+    public function save_lokasi()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+        if (!$this->validate([
+            'nama_lokasi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama lokasi tidak boleh kosong!',
+                ]
+            ],
+            'alamat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'alamat tidak boleh kosong!',
+                ]
+            ],
+            'lat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'koordinat tidak boleh kosong!',
+                ]
+            ],
+            'long' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'koordinat tidak boleh kosong!',
+                ]
+            ],
+
+        ])) {
+            return redirect()->to('/admin/tambah_lokasi')->withInput();
+        }
+
+        $this->lokasi->save([
+            'nama_lokasi' => $this->request->getVar('nama_lokasi'),
+            'alamat' => $this->request->getVar('alamat'),
+            'lat' => $this->request->getVar('lat'),
+            'long' => $this->request->getVar('long'),
+        ]);
+
+        session()->setFlashdata('success', 'lokasi berhasil disimpan!');
+        return redirect()->to('/admin/lokasi');
+    }
+
+    public function delete_lokasi($id)
+    {
+
+        $this->lokasi->delete($id);
+
+        session()->setFlashdata('success', 'Data berhasil di dihapus!');
+        return redirect()->to('/admin/lokasi');
+    }
+
+    public function edit_lokasi($id)
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+
+        $data = [
+            'page_data' => [
+                'title' => 'Jadwal',
+                'sub_title' => 'Lokasi',
+            ],
+            'validation' => \Config\Services::validation(),
+            'lokasi' => $this->lokasi->find($id)
+        ];
+
+        return view('/admin/edit_lokasi', $data);
+    }
+
+    public function update_lokasi()
+    {
+        if (!isset(session()->user_data)) {
+            return redirect()->to('/login');
+        }
+        $id = $this->request->getVar('id');
+        if (!$this->validate([
+            'nama_lokasi' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'nama lokasi tidak boleh kosong!',
+                ]
+            ],
+            'alamat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'alamat tidak boleh kosong!',
+                ]
+            ],
+            'lat' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'koordinat tidak boleh kosong!',
+                ]
+            ],
+            'long' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'koordinat tidak boleh kosong!',
+                ]
+            ],
+
+        ])) {
+            return redirect()->to('/admin/edit_lokasi/' . $id)->withInput();
+        }
+        $this->lokasi->save([
+            'id' => $id,
+            'nama_lokasi' => $this->request->getVar('nama_lokasi'),
+            'alamat' => $this->request->getVar('alamat'),
+            'lat' => $this->request->getVar('lat'),
+            'long' => $this->request->getVar('long'),
+        ]);
+
+        session()->setFlashdata('success', 'lokasi berhasil diubah!');
+        return redirect()->to('/admin/lokasi');
+    }
 }

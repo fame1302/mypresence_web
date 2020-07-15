@@ -19,9 +19,20 @@
   <link href="<?= base_url(); ?>/sb_admin/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?= base_url(); ?>/css/style.css" rel="stylesheet">
 
-  <link href="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
 
+  <link href="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+  <?php if ($page_data['sub_title'] == 'Lokasi') : ?>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css" type="text/css" />
+    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+  <?php endif ?>
 
 </head>
 
@@ -278,6 +289,7 @@
 
   <!-- custom -->
   <script src="<?= base_url(); ?>/js/script.js"></script>
+  <script src="<?= base_url(); ?>/js/location.js"></script>
 </body>
 
 </html>
