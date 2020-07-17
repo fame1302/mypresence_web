@@ -29,6 +29,11 @@ class ProfilJadwal extends Migration
 				'type'	=> 'int',
 				'constraint' => 3
 			],
+			'default'	=> [
+				'type'	=> 'int',
+				'constraint' => 1,
+				'null' => true
+			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true

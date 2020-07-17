@@ -20,7 +20,7 @@ class Jadwal extends Migration
 				'unsigned' => true,
 			],
 			'tanggal'	=> [
-				'type'	=> 'datetime'
+				'type'	=> 'date'
 			],
 			'id_lokasi'	=> [
 				'type'	=> 'int',

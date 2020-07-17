@@ -65,6 +65,10 @@ $routes->post('/admin/tambah_lokasi', 'AdminController::save_lokasi');
 $routes->get('/admin/edit_lokasi/(:num)', 'AdminController::edit_lokasi/$1');
 $routes->post('/admin/edit_lokasi', 'AdminController::update_lokasi');
 
+// $routes->get('/admin/jadwal/(:any)', 'AdminController::jadwal/$1/$2');
+$routes->get('/admin/jadwal', 'AdminController::jadwal');
+
+
 
 
 /**

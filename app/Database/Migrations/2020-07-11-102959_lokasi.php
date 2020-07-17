@@ -29,6 +29,11 @@ class Lokasi extends Migration
 			'long'	=> [
 				'type'	=> 'double',
 			],
+			'default'	=> [
+				'type'	=> 'int',
+				'constraint' => 1,
+				'null' => true
+			],
 			'created_at'	=> [
 				'type'	=> 'datetime',
 				'null' => true

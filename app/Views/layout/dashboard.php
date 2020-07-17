@@ -31,7 +31,13 @@
     <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src="<?= base_url(); ?>/js/location.js"></script>
 
+
+  <?php endif ?>
+
+  <?php if ($page_data['sub_title'] == 'Manage Jadwal') : ?>
+    <script src="<?= base_url(); ?>/js/jadwal.js"></script>
   <?php endif ?>
 
 </head>
@@ -109,7 +115,7 @@
             <h6 class="collapse-header">Menu Jadwal</h6>
             <a class="collapse-item <?= (($page_data['sub_title'] == 'Tambah Profil Jadwal') || ($page_data['sub_title'] == 'Profil Jadwal')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/profil_jadwal"><span class="fa fa-tasks mr-2"></span> Profil Jadwal</a>
             <a class="collapse-item <?= (($page_data['sub_title'] == 'Tambah Profil Jadwal') || ($page_data['sub_title'] == 'Lokasi')) ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/lokasi"><span class="fas fa-map-marker mr-2"></span> Lokasi</a>
-            <a class="collapse-item <?= ($page_data['sub_title'] == 'Tambah Jadwal') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/tambah_Jadwal">Tambah Jadwal</a>
+            <a class="collapse-item <?= ($page_data['sub_title'] == 'Manage Jadwal') ? 'active' : ''; ?>" href="<?= base_url(); ?>/admin/jadwal"><span class="fa fa-calendar mr-2"></span> Tambah Jadwal</a>
           </div>
         </div>
       </li>
@@ -289,7 +295,6 @@
 
   <!-- custom -->
   <script src="<?= base_url(); ?>/js/script.js"></script>
-  <script src="<?= base_url(); ?>/js/location.js"></script>
 </body>
 
 </html>

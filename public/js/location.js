@@ -1,13 +1,5 @@
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-
 function showPosition(position) {
-  //   alert("oje");
+  // alert("oje");
   var lat = document.getElementById("latitude").value;
   var long = document.getElementById("longitude").value;
 
@@ -60,3 +52,12 @@ function showPosition(position) {
 
   marker.on("dragend", onDragEnd);
 }
+var x = document.getElementById("map-container");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+getLocation();

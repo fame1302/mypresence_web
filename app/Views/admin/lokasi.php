@@ -43,6 +43,7 @@
                             <th>Nama Lokasi</th>
                             <th>Alamat</th>
                             <th>Koordinat</th>
+                            <th>Default</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -58,6 +59,11 @@
                                     <?= $key['long'] . " , " ?>
                                     <br>
                                     <?= $key['lat'] ?>
+                                </td>
+                                <td>
+                                    <?php if ($key['default'] == 1) : ?>
+                                        <span class="badge badge-pill badge-primary"> <span class="fa fa-check mr-2"></span>Default</span>
+                                    <?php endif; ?>
                                 </td>
                                 <td>
                                     <a href="/admin/edit_lokasi/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>

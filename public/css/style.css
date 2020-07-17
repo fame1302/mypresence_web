@@ -39,3 +39,29 @@
   border-radius: 3px;
   display: none;
 }
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px 80px;
+  grid-template-rows: 60px;
+  justify-items: center;
+  align-items: center;
+  gap: 5px;
+}
+.calendar-date {
+  display: grid;
+  grid-template-columns: 80px 80px 80px 80px 80px 80px 80px;
+  grid-template-rows: 80px 80px 80px 80px 80px;
+  gap: 5px;
+}
+.calendar-date > .item {
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  cursor: pointer;
+}
+
+#jadwal-detail li > .detail-label {
+  font-size: 0.9em;
+}

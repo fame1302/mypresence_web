@@ -44,6 +44,7 @@
                             <th>Jam Masuk</th>
                             <th>Jam Pulang</th>
                             <th>Durasi Kehadiran</th>
+                            <th>Default</th>
                             <th>aksi</th>
                         </tr>
                     </thead>
@@ -57,6 +58,11 @@
                                 <td><?= $key['jam_masuk']; ?></td>
                                 <td><?= $key['jam_pulang']; ?></td>
                                 <td><?= $key['durasi']; ?> Menit</td>
+                                <td>
+                                    <?php if ($key['default'] == 1) : ?>
+                                        <span class="badge badge-pill badge-primary"> <span class="fa fa-check mr-2"></span>Default</span>
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <a href="/admin/edit_profil_jadwal/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
 

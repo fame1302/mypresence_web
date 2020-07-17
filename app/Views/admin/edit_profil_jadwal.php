@@ -69,7 +69,15 @@
                     </div>
                     <label class="col-sm-1 col-form-label">Menit</label>
                 </div>
-
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <?php
+                        $default = (old('default')) ? old('default') : $profil_jadwal['default'];
+                        ?>
+                        <input name="default" type="checkbox" class="custom-control-input" id="customCheck" <?= ($default == 'on' || $default == 1) ? 'checked' : ''; ?>>
+                        <label class="custom-control-label" style="line-height: 27px;" for="customCheck">Set sebagai profil jadwal default.</label>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-sm-5">
                         <input type="submit" class="btn btn-primary" value="Simpan Perubahan">

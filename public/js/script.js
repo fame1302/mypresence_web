@@ -37,7 +37,7 @@ $(document).ready(function () {
     $("#user-foto-preview").show();
     $(this).next(".input-foto-user-label").html(fileName);
   });
-  getLocation();
+  // getLocation();
 });
 
 function imgPreview() {
