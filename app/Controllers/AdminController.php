@@ -568,7 +568,9 @@ class AdminController extends BaseController
             return redirect()->to('/admin/tambah_profil_jadwal')->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
-        $this->profil_jadwal->clearDefault();
+        if ($def != null) {
+            $this->profil_jadwal->clearDefault();
+        }
         $this->profil_jadwal->save([
             'nama_profil' => $this->request->getVar('nama_profil'),
             'jam_masuk' => $this->request->getVar('jam_masuk'),
@@ -646,7 +648,9 @@ class AdminController extends BaseController
             return redirect()->to('/admin/edit_profil_jadwal/' . $id)->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
-        $this->profil_jadwal->clearDefault();
+        if ($def != null) {
+            $this->profil_jadwal->clearDefault();
+        }
         $this->profil_jadwal->save([
             'id' => $id,
             'nama_profil' => $this->request->getVar('nama_profil'),
@@ -721,7 +725,9 @@ class AdminController extends BaseController
             return redirect()->to('/admin/tambah_lokasi')->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
-        $this->lokasi->clearDefault();
+        if ($def != null) {
+            $this->lokasi->clearDefault();
+        }
         $this->lokasi->save([
             'nama_lokasi' => $this->request->getVar('nama_lokasi'),
             'alamat' => $this->request->getVar('alamat'),
@@ -797,7 +803,9 @@ class AdminController extends BaseController
             return redirect()->to('/admin/edit_lokasi/' . $id)->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
-        $this->lokasi->clearDefault();
+        if ($def != null) {
+            $this->lokasi->clearDefault();
+        }
         $this->lokasi->save([
             'id' => $id,
             'nama_lokasi' => $this->request->getVar('nama_lokasi'),
@@ -815,6 +823,9 @@ class AdminController extends BaseController
     {
         $bln = $this->request->getVar('bl');
         $thn = $this->request->getVar('th');
+        $n = Time::now('Asia/Jakarta');
+        $today = Time::create($n->getYear(), $n->getMonth(), $n->getDay(), null, null, null, 'Asia/Jakarta');
+
         //data bulan
         if ($bln != '' || $thn != '') {
             $now = Time::createFromDate($thn, $bln);
@@ -828,11 +839,13 @@ class AdminController extends BaseController
             $bulan[] = $bln;
         }
 
+
         $last = cal_days_in_month(CAL_GREGORIAN, $now->getMonth(), $now->getYear());
         $tgl = array();
         for ($i = 1; $i < $last + 1; $i++) {
             $date = Time::createFromDate($now->getYear(), $now->getMonth(), $i)->toLocalizedString('Y-MM-dd');
             $jadwal = $this->jadwal->where(['tanggal' => $date])->first();
+            $req = Time::create($now->getYear(), $now->getMonth(), $i);
             $tgl[] = [
                 'index' => Time::createFromDate($now->getYear(), $now->getMonth(), $i)->toLocalizedString('e'),
                 'tanggal' => $i,
@@ -842,6 +855,7 @@ class AdminController extends BaseController
                     'jam_masuk' => $this->profil_jadwal->where(['id' => $jadwal['id_profil']])->first()['jam_masuk'],
                     'jam_pulang' => $this->profil_jadwal->where(['id' => $jadwal['id_profil']])->first()['jam_pulang'],
                     'lokasi' => $this->lokasi->where(['id' => $jadwal['id_lokasi']])->first()['nama_lokasi'],
+                    'able' => ($req->isBefore($today)) ? 'false' : 'true',
                 ]
             ];
         };
@@ -855,9 +869,97 @@ class AdminController extends BaseController
             'bulan' => $bulan,
             'tgl' => $tgl,
             'now' => $now,
+            'jml_hari' => $last
         ];
         // $da = cal_days_in_month(CAL_GREGORIAN, 01, 2020);
-        // dd($da);
+        // dd($now);
         return view('admin/jadwal', $data);
+    }
+
+    public function generate_jadwal()
+    {
+        $n = Time::now('Asia/Jakarta');
+        $now = Time::create($n->getYear(), $n->getMonth(), $n->getDay(), null, null, null, 'Asia/Jakarta');
+        // dd($this->request->getVar());
+        // dd($now);
+        $pdef = $this->profil_jadwal->where(['default' => 1])->first();
+        $ldef = $this->lokasi->where(['default' => 1])->first();
+        if ($pdef == null) {
+            session()->setFlashdata('error', 'tidak ada profil default!');
+            return redirect()->to($this->request->getVar('c_url'));
+        } elseif ($ldef == null) {
+            session()->setFlashdata('error', 'tidak ada lokasi default!');
+            return redirect()->to($this->request->getVar('c_url'));
+        };
+
+        $test = array();
+        for ($i = 1; $i <= $this->request->getVar('jml_hari'); $i++) {
+            $req = Time::create($this->request->getVar('tahun'), $this->request->getVar('bulan'), $i, null, null, null, 'Asia/Jakarta');
+            if ($req->isBefore($now)) {
+                session()->setFlashdata('warning', 'tidak bisa menambahkan jadwal sebelum hari ini!');
+            } else {
+                session()->setFlashdata('success', 'generate jadwal berhasil!');
+                $tgl = $req->toLocalizedString('Y-MM-dd');
+                if ($this->jadwal->where(['tanggal' => $tgl])->first() == null) {
+                    if ($req->toLocalizedString('e') == 1 || $req->toLocalizedString('e') == 7) {
+                    } else {
+                        $this->jadwal->save([
+                            'id_profil' => $pdef['id'],
+                            'tanggal' => $tgl,
+                            'id_lokasi' => $ldef['id']
+                        ]);
+                    }
+                }
+            }
+        }
+        // dd($test);
+        return redirect()->to($this->request->getVar('c_url'));
+        # code...
+    }
+
+    public function add_jadwal()
+    {
+        $tgl = $this->request->getVar('tgl');
+        $data = [
+            'validation' => \Config\Services::validation(),
+            'profil' => $this->profil_jadwal->findAll(),
+            'lokasi' => $this->lokasi->findAll(),
+            'jadwal' => $this->jadwal->where(['tanggal' => $tgl])->first(),
+            'tanggal' => $tgl,
+            'url' => $this->request->getVar('url')
+        ];
+        // dd($data['jadwal']);
+        return view('admin/tambah_jadwal', $data);
+    }
+
+    public function save_jadwal()
+    {
+        $tgl = $this->request->getVar('tanggal');
+        $jadwal = $this->jadwal->where(['tanggal' => $tgl])->first();
+        if ($jadwal == null) {
+            $this->jadwal->save([
+                'id_profil' => $this->request->getVar('profil'),
+                'tanggal' => $tgl,
+                'id_lokasi' => $this->request->getVar('lokasi')
+            ]);
+        } else {
+            $this->jadwal->save([
+                'id' => $jadwal['id'],
+                'id_profil' => $this->request->getVar('profil'),
+                'tanggal' => $tgl,
+                'id_lokasi' => $this->request->getVar('lokasi')
+            ]);
+        }
+        session()->setFlashdata('success', 'jadwal berhasil ditambahkan!');
+        return redirect()->to($this->request->getVar('url'));
+    }
+
+    public function delete_jadwal()
+    {
+        $tgl = $this->request->getVar('tgl');
+        $id = $this->jadwal->where(['tanggal' => $tgl])->first()['id'];
+        $this->jadwal->delete($id);
+        session()->setFlashdata('success', 'jadwal berhasil dihapus');
+        dd($id);
     }
 }

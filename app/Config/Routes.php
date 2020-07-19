@@ -67,6 +67,10 @@ $routes->post('/admin/edit_lokasi', 'AdminController::update_lokasi');
 
 // $routes->get('/admin/jadwal/(:any)', 'AdminController::jadwal/$1/$2');
 $routes->get('/admin/jadwal', 'AdminController::jadwal');
+$routes->post('/admin/add_jadwal', 'AdminController::add_jadwal');
+$routes->post('/admin/save_jadwal', 'AdminController::save_jadwal');
+$routes->post('/admin/delete_jadwal', 'AdminController::delete_jadwal');
+$routes->post('/admin/generate_jadwal', 'AdminController::generate_jadwal');
 
 
 

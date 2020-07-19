@@ -8,5 +8,5 @@ class JadwalModel extends Model
 {
     protected $table = 'jadwal';
     protected $useTimestamps = true;
-    protected $allowedFields = ['id_profil', 'tanggal', 'lokasi'];
+    protected $allowedFields = ['id_profil', 'tanggal', 'id_lokasi'];
 }

@@ -65,3 +65,20 @@
 #jadwal-detail li > .detail-label {
   font-size: 0.9em;
 }
+#btn-jadwal > button {
+  font-size: 0.7em;
+  padding: 3px 5px;
+  padding-bottom: 1px;
+  margin: 13px 2px;
+}
+
+#btn-jadwal > button#edit-jadwal {
+  padding-right: 2px;
+}
+#btn-jadwal {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  height: 48px;
+  /* display: none; */
+}
