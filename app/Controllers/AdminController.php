@@ -26,6 +26,7 @@ class AdminController extends BaseController
     protected $profil_jadwal;
     protected $jadwal;
     protected $lokasi;
+    protected $auth;
 
     public function __construct()
     {
@@ -35,13 +36,17 @@ class AdminController extends BaseController
         $this->profil_jadwal = new ProfilJadwalModel();
         $this->jadwal = new JadwalModel();
         $this->lokasi = new LokasiModel();
+
+        (session()->user_data['level'] == 1) ? $this->auth = true : $this->auth = false;
     }
 
     public function index()
     {
-
         if (!isset(session()->user_data)) {
             return redirect()->to('/login');
+        }
+        if ($this->auth == false) {
+            return redirect()->to('/');
         }
 
         $data = [
@@ -61,6 +66,9 @@ class AdminController extends BaseController
     {
         if (!isset(session()->user_data)) {
             return redirect()->to('/login');
+        }
+        if (!$this->auth) {
+            return redirect()->to('/');
         }
 
         $data = [
@@ -88,6 +96,8 @@ class AdminController extends BaseController
                 'title' => 'Jabatan',
                 'sub_title' => 'Tambah Jabatan',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'list_jabatan' => $this->jabatan->getAvailableJabatan()
         ];
@@ -164,6 +174,8 @@ class AdminController extends BaseController
                 'title' => 'Jabatan',
                 'sub_title' => 'Edit Jabatan',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'jabatan' => $this->jabatan->where(['id' => $id])->first()
         ];
@@ -224,6 +236,8 @@ class AdminController extends BaseController
                 'title' => 'Karyawan',
                 'sub_title' => 'Daftar Karyawan',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'karyawan' => $this->karyawan->getKaryawan()
         ];
 
@@ -241,6 +255,8 @@ class AdminController extends BaseController
                 'title' => 'Karyawan',
                 'sub_title' => 'Tambah Karyawan',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'list_jabatan' => $this->jabatan->getAvailableJabatan()
         ];
@@ -379,6 +395,8 @@ class AdminController extends BaseController
                 'title' => 'Karyawan',
                 'sub_title' => 'Edit Karyawan',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'karyawan' => $this->karyawan->getKaryawanById($id),
             'validation' => \Config\Services::validation(),
             'list_jabatan' => $this->jabatan->getAvailableJabatanOnEdit($id)
@@ -511,6 +529,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Profil Jadwal',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'profil_jabatan' => $this->profil_jadwal->findAll()
         ];
         return view('admin/profil_jadwal', $data);
@@ -524,6 +544,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Profil Jadwal',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'profil_jadwal' => $this->profil_jadwal->findAll()
         ];
@@ -603,6 +625,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Profil Jadwal',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'profil_jadwal' => $this->profil_jadwal->find($id)
         ];
@@ -670,6 +694,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Lokasi',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'lokasi' => $this->lokasi->findAll()
         ];
         return view('admin/lokasi', $data);
@@ -683,6 +709,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Lokasi',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'lokasi' => $this->lokasi->findAll()
         ];
@@ -760,6 +788,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Lokasi',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'validation' => \Config\Services::validation(),
             'lokasi' => $this->lokasi->find($id)
         ];
@@ -865,6 +895,8 @@ class AdminController extends BaseController
                 'title' => 'Jadwal',
                 'sub_title' => 'Manage Jadwal',
             ],
+            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+
             'jadwal' => $this->jadwal->findAll(),
             'bulan' => $bulan,
             'tgl' => $tgl,

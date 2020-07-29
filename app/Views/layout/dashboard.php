@@ -19,8 +19,10 @@
   <link href="<?= base_url(); ?>/sb_admin/css/sb-admin-2.min.css" rel="stylesheet">
   <link href="<?= base_url(); ?>/css/style.css" rel="stylesheet">
 
+  <?php if ($page_data['sub_title'] == 'Dashboard') : ?>
 
-  <link href="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <?php endif ?>
 
   <?php if ($page_data['sub_title'] == 'Lokasi') : ?>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
@@ -186,8 +188,10 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Fahmi Pamungkas</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama']; ?></span>
+                <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
+                <?php $foto = ($user['foto'] == '') ? 'https://source.unsplash.com/QAB-WJcbgJk/60x60' : "/img/user_profile/" . $user['foto']; ?>
+                <img class="img-profile rounded-circle" src="<?= $foto; ?>">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -195,16 +199,17 @@
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <!-- <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                   Settings
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                   Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                </a> -->
+                <!-- <div class="dropdown-divider"></div> -->
+                <!-- <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal"> -->
+                <a class="dropdown-item" href="/logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -279,19 +284,22 @@
   <!-- Custom scripts for all pages-->
   <script src="<?= base_url(); ?>/sb_admin/js/sb-admin-2.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="<?= base_url(); ?>/sb_admin/vendor/chart.js/Chart.min.js"></script>
+  <?php if ($page_data['sub_title'] == 'Dashboard') : ?>
 
-  <!-- Page level custom scripts -->
-  <script src="<?= base_url(); ?>/sb_admin/js/demo/chart-area-demo.js"></script>
-  <script src="<?= base_url(); ?>/sb_admin/js/demo/chart-pie-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?= base_url(); ?>/sb_admin/vendor/chart.js/Chart.min.js"></script>
 
-  <!-- Page level plugins -->
-  <script src="<?= base_url(); ?>/sb_admin/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url(); ?>/sb_admin/js/demo/chart-area-demo.js"></script>
+    <script src="<?= base_url(); ?>/sb_admin/js/demo/chart-pie-demo.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="<?= base_url(); ?>/sb_admin/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?= base_url(); ?>/sb_admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>/sb_admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url(); ?>/sb_admin/js/demo/datatables-demo.js"></script>
+  <?php endif ?>
 
   <!-- custom -->
   <script src="<?= base_url(); ?>/js/script.js"></script>

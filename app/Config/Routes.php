@@ -2,6 +2,7 @@
 
 namespace Config;
 
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -31,10 +32,11 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'UserController::index');
 $routes->get('/test_var', 'TestVarController::index');
-$routes->get('/login', 'UserController::index');
+$routes->get('/login', 'UserController::view_login');
 $routes->post('/login', 'UserController::login');
+$routes->get('/logout', 'UserController::logout');
 
 $routes->get('/admin', 'AdminController::index');
 $routes->get('/admin/jabatan', 'AdminController::jabatan');
@@ -73,7 +75,9 @@ $routes->post('/admin/delete_jadwal', 'AdminController::delete_jadwal');
 $routes->post('/admin/generate_jadwal', 'AdminController::generate_jadwal');
 
 
-
+// $routes->post('/api/get_user', 'ApiController::getUser');
+$routes->resource('/api/users', ['controller' => "Api\Users"]);
+$routes->post('/api/login', "Api\Users::login");
 
 /**
  * --------------------------------------------------------------------
