@@ -53,7 +53,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(); ?>  /admin">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fa fa-address-card"></i>
         </div>
@@ -79,7 +79,7 @@
 
       <!-- Nav Item - Jabatan -->
       <li class="nav-item <?= ($page_data['title'] == 'Jabatan') ? 'active' : ''; ?>">
-        <a class="nav-link" href="/admin/jabatan">
+        <a class="nav-link" href="<?= base_url(); ?>/admin/jabatan">
           <i class="fas fa-fw fa-id-badge"></i>
           <span>Jabatan</span></a>
       </li>
@@ -190,7 +190,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $user['nama']; ?></span>
                 <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
-                <?php $foto = ($user['foto'] == '') ? 'https://source.unsplash.com/QAB-WJcbgJk/60x60' : "/img/user_profile/" . $user['foto']; ?>
+                <?php $foto = ($user['foto'] == '') ? 'https://source.unsplash.com/QAB-WJcbgJk/60x60' : base_url() . "/img/user_profile/" . $user['foto']; ?>
                 <img class="img-profile rounded-circle" src="<?= $foto; ?>">
               </a>
               <!-- Dropdown - User Information -->
@@ -208,8 +208,8 @@
                   Activity Log
                 </a> -->
                 <!-- <div class="dropdown-divider"></div> -->
-                <!-- <a class="dropdown-item" href="/logout" data-toggle="modal" data-target="#logoutModal"> -->
-                <a class="dropdown-item" href="/logout">
+                <!-- <a class="dropdown-item" href="<?= base_url(); ?>/logout" data-toggle="modal" data-target="#logoutModal"> -->
+                <a class="dropdown-item" href="<?= base_url(); ?>/logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>

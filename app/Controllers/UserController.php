@@ -18,18 +18,18 @@ class UserController extends BaseController
 
     public function index()
     {
-        $data = [
-            'title' => 'My Presence - Login',
-            'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
+        // $data = [
+        //     'title' => 'My Presence - Login',
+        //     'user' => $this->karyawan->getKaryawan(session()->user_data['username']),
 
-        ];
+        // ];
         // dd(session()->user_data);
-        return view('welcome_message', $data);
+        return view('welcome_message');
     }
     public function view_login()
     {
         if (isset(session()->user_data)) {
-            return redirect()->to('/admin');
+            return redirect()->to(base_url() . '/admin');
         }
         $data = [
             'title' => 'My Presence - Login',
@@ -41,6 +41,7 @@ class UserController extends BaseController
 
     public function login()
     {
+        // dd("test");
         $userModel = new UserModel();
         if (!$this->validate([
             'username' => [
@@ -59,8 +60,8 @@ class UserController extends BaseController
             ],
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/login')->withInput()->with('validation', $validation);
-            // dd($validation);
+            return redirect()->to(base_url() . base_url() . '/login')->withInput()->with('validation', $validation);
+            dd($validation);
         };
 
         $db = \Config\Database::connect();
@@ -74,7 +75,7 @@ class UserController extends BaseController
             $error = [
                 'message' => 'password salah!'
             ];
-            return redirect()->to('/login')->withInput()->with('error', $error);
+            return redirect()->to(base_url() . '/login')->withInput()->with('error', $error);
         }
 
         $user = [
@@ -84,10 +85,10 @@ class UserController extends BaseController
         ];
         // dd($user);
         session()->set('user_data', $user);
-        return redirect()->to('/admin');
+        return redirect()->to(base_url() . '/admin');
 
 
-        // return redirect()->to('/login')->with('error', $error);
+        // return redirect()->to(base_url(). '/login')->with('error', $error);
 
         # code...
     }
@@ -95,7 +96,7 @@ class UserController extends BaseController
     public function logout()
     {
         session_destroy();
-        return redirect()->to('/login');
+        return redirect()->to(base_url() . '/login');
         # code...
     }
     //--------------------------------------------------------------------

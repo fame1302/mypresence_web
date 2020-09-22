@@ -7,7 +7,7 @@
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800"><?= $page_data['title']; ?></h1>
-    <a href="/admin/tambah_karyawan" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Karyawan</a>
+    <a href="<?= base_url(); ?>/admin/tambah_karyawan" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Karyawan</a>
   </div>
   <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
@@ -45,16 +45,16 @@
               <tr>
                 <td><?= $no++; ?></td>
                 <td>
-                  <img class="" style="width:100px" src="/img/user_profile/<?= $key['foto']; ?>" alt="">
+                  <img class="" style="width:100px" src="<?= base_url(); ?>/img/user_profile/<?= $key['foto']; ?>" alt="">
                 </td>
                 <td><?= $key['nama']; ?></td>
                 <td><?= ($key['jenis_kelamin'] == 'p') ? 'Perempuan' : 'Laki - laki'; ?></td>
                 <td><?= $key['alamat']; ?></td>
                 <td><?= $key['jabatan']; ?></td>
                 <td>
-                  <a href="/admin/edit_karyawan/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
+                  <a href="<?= base_url(); ?>/admin/edit_karyawan/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
 
-                  <form action="/admin/karyawan/<?= $key['id']; ?>" method="post">
+                  <form action="<?= base_url(); ?>/admin/karyawan/<?= $key['id']; ?>" method="post">
                     <?= csrf_field(); ?>
                     <input type="hidden" name="_method" value="delete">
                     <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?')">Delete</button>

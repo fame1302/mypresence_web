@@ -14,7 +14,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <ul class="my-breadcrumb">
-                <li class="m-0 font-weight-bold text-primary"><a href="/admin/lokasi"><?= $page_data['sub_title']; ?></a></li>
+                <li class="m-0 font-weight-bold text-primary"><a href="<?= base_url(); ?>/admin/lokasi"><?= $page_data['sub_title']; ?></a></li>
                 <li class="m-0 font-weight-bold">/</li>
                 <li class="m-0 font-weight-bold">Tambah Lokasi</li>
             </ul>

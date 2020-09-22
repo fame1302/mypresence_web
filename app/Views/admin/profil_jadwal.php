@@ -7,7 +7,7 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><?= $page_data['title']; ?></h1>
-        <a href="/admin/tambah_profil_jadwal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Profil</a>
+        <a href="<?= base_url(); ?>/admin/tambah_profil_jadwal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Profil</a>
     </div>
     <!-- <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p> -->
 
@@ -64,9 +64,9 @@
                                     <?php endif; ?>
                                 </td>
                                 <td>
-                                    <a href="/admin/edit_profil_jadwal/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
+                                    <a href="<?= base_url(); ?>/admin/edit_profil_jadwal/<?= $key['id']; ?>" class="btn btn-warning mb-2">Edit</a>
 
-                                    <form action="/admin/profil_jadwal/<?= $key['id']; ?>" method="post">
+                                    <form action="<?= base_url(); ?>/admin/profil_jadwal/<?= $key['id']; ?>" method="post">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="_method" value="delete">
                                         <button type="submit" onclick="return confirm('apa anda yakin?');" class="btn btn-danger">Hapus</button>

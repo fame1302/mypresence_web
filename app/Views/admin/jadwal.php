@@ -44,7 +44,7 @@
             <?php endif; ?>
             <div class="row mx-0">
                 <div class="row col-sm-6">
-                    <form action="/admin/jadwal" method="get" class="row col-sm-12 d-inline">
+                    <form action="<?= base_url(); ?>/admin/jadwal" method="get" class="row col-sm-12 d-inline">
                         <select name="bl" id="" class="form-control col-sm-4 d-inline mr-1">
                             <?php foreach ($bulan as $key) : ?>
                                 <option value="<?= $key->getMonth(); ?>" <?= ($key->getMonth() == $now->getMonth()) ? 'selected' : ''; ?>><?= $key->toLocalizedString('MMMM') ?></option>
@@ -57,7 +57,7 @@
                     </form>
                 </div>
                 <div class="col-sm-6 row">
-                    <form action="/admin/generate_jadwal" class="col-sm-12 row" method="POST">
+                    <form action="<?= base_url(); ?>/admin/generate_jadwal" class="col-sm-12 row" method="POST">
                         <input type="hidden" name="bulan" value="<?= $now->getMonth(); ?>">
                         <input type="hidden" name="tahun" value="<?= $now->getYear(); ?>">
                         <input type="hidden" name="jml_hari" value="<?= $jml_hari; ?>">
@@ -133,13 +133,13 @@
                         <div class="card-header" id="jadwal-btn">
                             Jadwal
                             <div id="btn-jadwal">
-                                <button id="add-jadwal" class="btn btn-success" onclick="addJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
+                                <button id="add-jadwal" class="btn btn-success" data-link="<?= base_url(); ?>/admin/add_jadwal" onclick="addJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
                                     <span class="fa fa-plus"></span>
                                 </button>
-                                <button id="edit-jadwal" class="btn btn-warning" onclick="addJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
+                                <button id="edit-jadwal" class="btn btn-warning" data-link="<?= base_url(); ?>/admin/add_jadwal" onclick="addJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
                                     <span class="fa fa-edit"></span>
                                 </button>
-                                <button id="delete-jadwal" class="btn btn-danger" onclick="deleteJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
+                                <button id="delete-jadwal" class="btn btn-danger" data-link="<?= base_url(); ?>/admin/delete_jadwal" onclick="deleteJadwal(this)" data-tgl="" data-url="<?= current_url(true); ?>">
                                     <span class="fa fa-times"></span>
                                 </button>
                             </div>

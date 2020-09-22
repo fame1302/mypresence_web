@@ -41,10 +41,10 @@ class Users extends ResourceController
         $password = $this->request->getVar('password');
 
         $user = $this->users->where(['username' => $username, 'password' => $password])->first();
-        $user['login'] = true;
         if ($user == null) {
             return $this->fail("username atau password salah!");
         }
+        $user['login'] = true;
         return $this->respond($user);
     }
 

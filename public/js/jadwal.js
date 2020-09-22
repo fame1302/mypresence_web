@@ -42,9 +42,10 @@ function addJadwal(e) {
   $("#date-detail").show();
   $("#ajax-container").slideDown();
   var c_tgl = $("#add-jadwal").attr("data-tgl");
+  var link = $("#add-jadwal").attr("data-link");
   var c_url = $("#add-jadwal").attr("data-url");
   $.ajax({
-    url: "/admin/add_jadwal",
+    url: link,
     type: "post",
     data: {
       url: c_url,
@@ -58,8 +59,9 @@ function addJadwal(e) {
 
 function deleteJadwal(e) {
   if (confirm("apa anda yakin?")) {
+    var link = $(e).attr("data-link");
     $.ajax({
-      url: "/admin/delete_jadwal",
+      url: link,
       type: "post",
       data: {
         url: $(e).attr("data-url"),

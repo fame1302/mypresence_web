@@ -43,10 +43,10 @@ class AdminController extends BaseController
     public function index()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         if ($this->auth == false) {
-            return redirect()->to('/');
+            return redirect()->to(base_url() . '/');
         }
 
         $data = [
@@ -65,10 +65,10 @@ class AdminController extends BaseController
     public function jabatan()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         if (!$this->auth) {
-            return redirect()->to('/');
+            return redirect()->to(base_url() . '/');
         }
 
         $data = [
@@ -88,7 +88,7 @@ class AdminController extends BaseController
     public function tambah_jabatan()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -110,7 +110,7 @@ class AdminController extends BaseController
     function save_jabatan()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         if (!$this->validate([
@@ -134,7 +134,7 @@ class AdminController extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to('/admin/tambah_jabatan')->withInput();
+            return redirect()->to(base_url() . '/admin/tambah_jabatan')->withInput();
         }
 
         $this->jabatan->save([
@@ -143,30 +143,30 @@ class AdminController extends BaseController
             'jml_karyawan' => $this->request->getVar('jml_karyawan')
         ]);
         session()->setFlashdata('success', 'Jabatan berhasil ditambahkan!');
-        return redirect()->to('/admin/tambah_jabatan');
+        return redirect()->to(base_url() . '/admin/tambah_jabatan');
     }
 
     public function delete_jabatan($id)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $use = $this->karyawan->where(['id_jabatan' => $id])->first();
         if ($use !== null) {
             session()->setFlashdata('error', 'Jabatan sudah ada yang mengisi!');
-            return redirect()->to('/admin/jabatan');
+            return redirect()->to(base_url() . '/admin/jabatan');
         }
 
         $this->jabatan->delete($id);
         session()->setFlashdata('success', 'Jabatan berhasil dihapus!');
-        return redirect()->to('/admin/jabatan');
+        return redirect()->to(base_url() . '/admin/jabatan');
     }
 
     public function edit_jabatan($id)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -186,7 +186,7 @@ class AdminController extends BaseController
     public function update_jabatan()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         $id = $this->request->getVar('id');
         if (!$this->validate([
@@ -210,7 +210,7 @@ class AdminController extends BaseController
                 ]
             ],
         ])) {
-            return redirect()->to('/admin/edit_jabatan/' . $id)->withInput();
+            return redirect()->to(base_url() . '/admin/edit_jabatan/' . $id)->withInput();
         }
 
         $this->jabatan->save([
@@ -220,13 +220,13 @@ class AdminController extends BaseController
             'jml_karyawan' => $this->request->getVar('jml_karyawan')
         ]);
         session()->setFlashdata('success', 'Perubahan berhasil disimpan!');
-        return redirect()->to('/admin/jabatan');
+        return redirect()->to(base_url() . '/admin/jabatan');
     }
 
     public function karyawan()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         // $jabatan = new JabatanModel();
@@ -247,7 +247,7 @@ class AdminController extends BaseController
     public function tambah_karyawan($alpha = false)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -267,7 +267,7 @@ class AdminController extends BaseController
     public function save_user()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
 
@@ -337,7 +337,7 @@ class AdminController extends BaseController
             ]
 
         ])) {
-            return redirect()->to('/admin/tambah_karyawan')->withInput();
+            return redirect()->to(base_url() . '/admin/tambah_karyawan')->withInput();
         }
 
         $filefoto = $this->request->getFile('foto');
@@ -366,7 +366,7 @@ class AdminController extends BaseController
         ]);
         // $karyawan = new KaryawanModel();
         session()->setFlashdata('success', 'Data berhasil di tambahkan!');
-        return redirect()->to('/admin/tambah_karyawan');
+        return redirect()->to(base_url() . '/admin/tambah_karyawan');
     }
 
     public function delete_user($id)
@@ -381,13 +381,13 @@ class AdminController extends BaseController
 
 
         session()->setFlashdata('success', 'Data berhasil di dihapus!');
-        return redirect()->to('/admin/karyawan');
+        return redirect()->to(base_url() . '/admin/karyawan');
     }
 
     public function edit_user($id)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -408,7 +408,7 @@ class AdminController extends BaseController
     public function update_user()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $id_karyawan = $this->request->getVar('id_karyawan');
@@ -484,7 +484,7 @@ class AdminController extends BaseController
             ]
 
         ])) {
-            return redirect()->to('/admin/edit_karyawan/' . $id_karyawan)->withInput();
+            return redirect()->to(base_url() . '/admin/edit_karyawan/' . $id_karyawan)->withInput();
         }
 
         $filefoto = $this->request->getFile('foto');
@@ -518,7 +518,7 @@ class AdminController extends BaseController
         ]);
         // $karyawan = new KaryawanModel();
         session()->setFlashdata('success', 'Data berhasil di ubah!');
-        return redirect()->to('/admin/karyawan');
+        return redirect()->to(base_url() . '/admin/karyawan');
     }
 
 
@@ -556,7 +556,7 @@ class AdminController extends BaseController
     public function save_profil_jadwal()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         // dd($this->request->getVar());
         if (!$this->validate([
@@ -587,7 +587,7 @@ class AdminController extends BaseController
             ],
 
         ])) {
-            return redirect()->to('/admin/tambah_profil_jadwal')->withInput();
+            return redirect()->to(base_url() . '/admin/tambah_profil_jadwal')->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
         if ($def != null) {
@@ -602,7 +602,7 @@ class AdminController extends BaseController
         ]);
 
         session()->setFlashdata('success', 'profil berhasil disimpan!');
-        return redirect()->to('/admin/profil_jadwal');
+        return redirect()->to(base_url() . '/admin/profil_jadwal');
     }
 
     public function delete_profil_jadwal($id)
@@ -611,13 +611,13 @@ class AdminController extends BaseController
         $this->profil_jadwal->delete($id);
 
         session()->setFlashdata('success', 'Data berhasil di dihapus!');
-        return redirect()->to('/admin/profil_jadwal');
+        return redirect()->to(base_url() . '/admin/profil_jadwal');
     }
 
     public function edit_profil_jadwal($id)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -631,13 +631,13 @@ class AdminController extends BaseController
             'profil_jadwal' => $this->profil_jadwal->find($id)
         ];
 
-        return view('/admin/edit_profil_jadwal', $data);
+        return view(base_url() . '/admin/edit_profil_jadwal', $data);
     }
 
     public function update_profil_jadwal()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         // dd($this->request->getVar());
         $id = $this->request->getVar('id');
@@ -669,7 +669,7 @@ class AdminController extends BaseController
             ],
 
         ])) {
-            return redirect()->to('/admin/edit_profil_jadwal/' . $id)->withInput();
+            return redirect()->to(base_url() . '/admin/edit_profil_jadwal/' . $id)->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
         if ($def != null) {
@@ -684,7 +684,7 @@ class AdminController extends BaseController
             'default' => $def
         ]);
         session()->setFlashdata('success', 'Perubahan berhasil disimpan!');
-        return redirect()->to('/admin/profil_jadwal');
+        return redirect()->to(base_url() . '/admin/profil_jadwal');
     }
 
     public function lokasi()
@@ -721,7 +721,7 @@ class AdminController extends BaseController
     public function save_lokasi()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         if (!$this->validate([
             'nama_lokasi' => [
@@ -750,7 +750,7 @@ class AdminController extends BaseController
             ],
 
         ])) {
-            return redirect()->to('/admin/tambah_lokasi')->withInput();
+            return redirect()->to(base_url() . '/admin/tambah_lokasi')->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
         if ($def != null) {
@@ -765,7 +765,7 @@ class AdminController extends BaseController
         ]);
 
         session()->setFlashdata('success', 'lokasi berhasil disimpan!');
-        return redirect()->to('/admin/lokasi');
+        return redirect()->to(base_url() . '/admin/lokasi');
     }
 
     public function delete_lokasi($id)
@@ -774,13 +774,13 @@ class AdminController extends BaseController
         $this->lokasi->delete($id);
 
         session()->setFlashdata('success', 'Data berhasil di dihapus!');
-        return redirect()->to('/admin/lokasi');
+        return redirect()->to(base_url() . '/admin/lokasi');
     }
 
     public function edit_lokasi($id)
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
 
         $data = [
@@ -794,13 +794,13 @@ class AdminController extends BaseController
             'lokasi' => $this->lokasi->find($id)
         ];
 
-        return view('/admin/edit_lokasi', $data);
+        return view(base_url() . '/admin/edit_lokasi', $data);
     }
 
     public function update_lokasi()
     {
         if (!isset(session()->user_data)) {
-            return redirect()->to('/login');
+            return redirect()->to(base_url() . '/login');
         }
         $id = $this->request->getVar('id');
         if (!$this->validate([
@@ -830,7 +830,7 @@ class AdminController extends BaseController
             ],
 
         ])) {
-            return redirect()->to('/admin/edit_lokasi/' . $id)->withInput();
+            return redirect()->to(base_url() . '/admin/edit_lokasi/' . $id)->withInput();
         }
         $def = ($this->request->getVar('default') == 'on') ? 1 : null;
         if ($def != null) {
@@ -846,7 +846,7 @@ class AdminController extends BaseController
         ]);
 
         session()->setFlashdata('success', 'lokasi berhasil diubah!');
-        return redirect()->to('/admin/lokasi');
+        return redirect()->to(base_url() . '/admin/lokasi');
     }
 
     public function jadwal()

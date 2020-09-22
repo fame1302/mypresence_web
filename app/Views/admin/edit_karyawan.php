@@ -81,7 +81,7 @@
                 <div class="form-group row">
                     <label for="level" class="col-sm-2 col-form-label">Foto</label>
                     <div class="col-sm-5">
-                        <img id="preview-foto" src="/img/user_profile/<?= ($karyawan['foto'] !== '') ? $karyawan['foto'] : ''; ?>" class="img-thumbnail col-sm-5 mb-3" alt="">
+                        <img id="preview-foto" src="<?= base_url(); ?>/img/user_profile/<?= ($karyawan['foto'] !== '') ? $karyawan['foto'] : ''; ?>" class="img-thumbnail col-sm-5 mb-3" alt="">
                         <div class="custom-file">
                             <input onchange="imgPreview()" type="file" name="foto" class="custom-file-input <?= ($validation->hasError('foto')) ? 'is-invalid' : ''; ?>" id="input-foto">
                             <div class="invalid-feedback">
